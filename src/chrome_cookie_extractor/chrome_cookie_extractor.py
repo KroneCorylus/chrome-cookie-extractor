@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 import sys 
 import getopt
@@ -8,7 +7,11 @@ import csv
 import json
 from pycookiecheat import chrome_cookies
 from os import scandir
-help = """chrome-cookie-extractor Exports your cookies to the Netscape cookie file format which is compatible with wget, curl, youtube-dl and more.
+
+
+__version__ = "0.1.1"
+__description__= "exports your cookies to the Netscape cookie file format which is compatible with wget, curl, youtube-dl and more."
+help = "chrome-cookie-extractor " + __description__ + """
 USAGE: chrome-cookie-extractor -u <url>
 MANDATORY:
     -u <url>, --url=<url>                         url from where extract the cookies  
@@ -99,7 +102,8 @@ def getProfileDirByName(name: str):
             return profiledir
     return None
 
-def main(argv):
+def main():
+    argv=sys.argv[1:]
     global profiledir, outputfile, silent, logonly
     url = None
     profile = None
@@ -121,7 +125,7 @@ def main(argv):
             elif opt in ("-l", "--logonly"):
                 logonly = True
         if not url:
-            raise MissingUrl("Missing URL")
+            raise MissingUrl("Missing URL check usage with chrome-cookie-extractor -h")
         if profile:
             chromedir = getProfileDirByName(profile)
             if not chromedir:
@@ -136,7 +140,6 @@ def main(argv):
         sys.exit(3)
     except MissingUrl as er:
         print(er)
-        print(help)
         sys.exit(3)
     except Exception as er:
         print(er)
@@ -172,8 +175,6 @@ def main(argv):
             print(host_key, subdomain, path, secure, exptime, name,decrypted_cookies.get(name), sep='\t')
 
     conn.close()
-if __name__ == '__main__':
-    main(sys.argv[1:])
 
 
 
