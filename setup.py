@@ -11,11 +11,7 @@ description = re.search(
     '^__description__\s*=\s*"(.*)"',
     open('src/chrome_cookie_extractor/chrome_cookie_extractor.py').read(),
     re.M
-    ).group(1)
- 
-with open("README.rst", "rb") as f:
-    long_descr = f.read().decode("utf-8")
- 
+    ).group(1) 
  
 setup(
     name = "chrome-cookie-extractor",
@@ -25,7 +21,6 @@ setup(
         },
     version = version,
     description = description,
-    long_description = long_descr,
     author = "a.Krone",
     author_email = "ahustinkrone@gmail.com",
     url = "https://github.com/KroneCorylus/chrome-cookie-extractor",
