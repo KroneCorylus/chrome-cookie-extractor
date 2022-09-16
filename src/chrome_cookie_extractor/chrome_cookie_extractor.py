@@ -84,7 +84,7 @@ def getQuery(url: str):
         is_secure,
         name,
         ((expires_utc/1000000)-11644473600), 
-        CASE WHEN host_key like "''' + url  + '''" THEN TRUE ELSE FALSE END 
+        CASE WHEN host_key like "''' + url.removeprefix("%")  + '''" THEN TRUE ELSE FALSE END 
     FROM 
         cookies 
     WHERE 
