@@ -131,11 +131,11 @@ def main():
         if not url:
             raise MissingUrl("Missing URL check usage with chrome-cookie-extractor -h")
         if profile:
-            chromedir = getProfileDirByName(profile)
-            if not chromedir:
+            profiledir = getProfileDirByName(profile)
+            if not profiledir:
                 raise ProfileNotExist("Profile do not exists: " + profile)
-            if not os.path.exists(chromedir + "/Cookies"):
-                raise CookiesFileNotFound("Cookies file do not exists:" + chromedir + "/Cookies")
+            if not os.path.exists(profiledir + "/Cookies"):
+                raise CookiesFileNotFound("Cookies file do not exists:" + profiledir + "/Cookies")
     except getopt.GetoptError:
         print(help)
         sys.exit(2)
@@ -157,6 +157,7 @@ def main():
     decrypted_cookies = a
     conn = sqlite3.connect(cookie_file)
     sql = getQuery(sql_url)
+    print("Profile: " + profiledir)
     if not logonly:
         with open(outputfile, 'w', encoding='US-ASCII', newline='') as tsv_file:
                 tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
