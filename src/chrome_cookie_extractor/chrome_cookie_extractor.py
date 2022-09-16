@@ -9,7 +9,7 @@ from pycookiecheat import chrome_cookies
 from os import scandir
 
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __description__= "exports your cookies to the Netscape cookie file format which is compatible with wget, curl, youtube-dl and more."
 help = "chrome-cookie-extractor " + __description__ + """
 USAGE: chrome-cookie-extractor -u <url>
