@@ -9,7 +9,7 @@ from pycookiecheat import chrome_cookies
 from os import scandir
 
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __description__= "exports your cookies to the Netscape cookie file format which is compatible with wget, curl, youtube-dl and more."
 help = "chrome-cookie-extractor " + __description__ + """
 USAGE: chrome-cookie-extractor -u <url>
@@ -20,6 +20,7 @@ OPTIONS:
     -p <profile>, --profile=<profile>             change the default profile to another.
     -s, --silent                                  not print cookies on terminal.
     -l, --logonly                                 not generate file.
+    -v, --version                                 print version
 
 ENVIRONMENT VARIABLES:
     CHROME_CONFIG_DIR: Use this environment variable to overide the default location (~/.config/google-chome) like this
@@ -108,10 +109,13 @@ def main():
     url = None
     profile = None
     try:
-        opts, args = getopt.getopt(argv,"u:o:p:sl",["url=","output=","profile=","silent","logonly"])
+        opts, args = getopt.getopt(argv,"u:o:p:slhv",["url=","output=","profile=","silent","logonly","help","version"])
         for opt, arg in opts:
-            if opt == '-h':
+            if opt == '-h' or opt == '--help':
                 print(help)
+                sys.exit()
+            if opt == '-v' or opt == '--version':
+                print("chrome-cookie-extractor v" + __version__)
                 sys.exit()
             elif opt in ("-o", "--output"):
                 print(opts,opt)
