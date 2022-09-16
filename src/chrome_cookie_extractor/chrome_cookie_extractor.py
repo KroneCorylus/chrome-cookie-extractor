@@ -167,6 +167,8 @@ def main():
                     tsv_writer.writerow([host_key, subdomain, path, secure, exptime, name,decrypted_cookies.get(name)])
                     if not silent:
                         print(host_key, subdomain, path, secure, exptime, name,decrypted_cookies.get(name), sep='\t')
+        print("");
+        print("cookies exported: " + outputfile)
     else:
         for host_key, path, is_secure, name, _exptime, _subdomain in conn.execute(sql):
             exptime = max(_exptime, 0)
